@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:security="http://www.springframework.org/schema/security"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
+
+	
+	<http auto-config="true">
+	    
+	    <form-login  login-page="/login.htm?authorization_error=true" 
+	        default-target-url="/home.htm" always-use-default-target="true"/>
+	    <!-- <http-basic />
+	    <logout /> -->
+	
+		<intercept-url pattern="/sparklr/**" access="ROLE_USER" />
+		<intercept-url pattern="/facebook/**" access="ROLE_USER" />
+		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	
+		<form-login authentication-failure-url="/login.jsp?authentication_error=true"
+			default-target-url="/index.jsp" login-page="/login.jsp"
+			login-processing-url="/login.do" />
+		<logout logout-success-url="/index.jsp" logout-url="/logout.do" />
+		<anonymous />
+		<custom-filter ref="oauth2ClientFilter" after="EXCEPTION_TRANSLATION_FILTER" />
+	</http>
+
+	<authentication-manager>
+	    <authentication-provider>
+	      <user-service>
+	        <user name="jimi" password="jimispassword" authorities="ROLE_USER, ROLE_ADMIN" />
+	        <user name="bob" password="bobspassword" authorities="ROLE_USER" />
+	      </user-service>
+	    </authentication-provider>
+	</authentication-manager>
+  
+<http pattern="/photos/**" create-session="never"
+	entry-point-ref="oauthAuthenticationEntryPoint"
+	access-decision-manager-ref="accessDecisionManager"
+	xmlns="http://www.springframework.org/schema/security">
+	<anonymous enabled="false" />
+	<intercept-url pattern="/photos" access="ROLE_USER,SCOPE_READ" />
+	<intercept-url pattern="/photos/trusted/**" access="ROLE_CLIENT,SCOPE_TRUST" />
+	<intercept-url pattern="/photos/user/**" access="ROLE_USER,SCOPE_TRUST" />
+	<intercept-url pattern="/photos/**" access="ROLE_USER,SCOPE_READ" />
+	<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
+	<access-denied-handler ref="oauthAccessDeniedHandler" />
+</http>
+
+</beans>

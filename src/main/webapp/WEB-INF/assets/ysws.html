@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>隐私服务 测试页面</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+<script src="text/javascript" type="text/javascript">
+</script>
+
+</head>
+<body>
+
+<div>
+	<div>用户校验</div>
+	<form action="/ysws/secret/svr" method="get">
+		<input type="text" name="signature" value="e734eb86d39ded2da2a97c8203273a55a4e610d2"/><br/>
+		<input type="text" name="timestamp" value="1377446373" />
+		<input type="text" name="nonce" value="1377760120" />
+		<input type="text" name="echostr" value="5917434679985318373" />
+		<br/>
+		<input type="submit" value="提交" />
+	</form>
+</div>
+
+<div>
+	<div>消息应答接口</div>
+	<form action="/ysws/secret/svr" method="post">
+		<input type="text" name="signature" value="e734eb86d39ded2da2a97c8203273a55a4e610d2"/><br/>
+		<input type="text" name="timestamp" value="1377446373" />
+		<input type="text" name="nonce" value="1377760120" />
+		<input type="text" name="echostr" value="5917434679985318373" />
+		<br/>
+		<input type="submit" value="提交" />
+	</form>
+</div>
+
+</body>
+</html>
