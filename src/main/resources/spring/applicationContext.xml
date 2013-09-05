@@ -13,6 +13,7 @@
 	<context:property-placeholder location="classpath*:*.properties,classpath*:properties/application.properties" />
 
 	<aop:aspectj-autoproxy />
+	<context:annotation-config/>
 
 	<!-- 使用annotation 自动注册bean,并保证@Required,@Autowired的属性被注入 -->
 	<context:component-scan base-package="com.kfpanda.study">
@@ -23,5 +24,5 @@
 	</context:component-scan>
 
 	<!-- <import resource="classpath*:db/ocrm-dataAccess.xml" /> -->
-	<import resource="classpath*:spring/spring-dao.xml" />
+	<!-- <import resource="classpath*:spring/spring-dao.xml" /> -->
 </beans>

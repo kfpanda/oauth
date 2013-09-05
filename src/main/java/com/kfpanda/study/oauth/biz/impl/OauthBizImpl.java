@@ -11,7 +11,7 @@ import com.kfpanda.study.oauth.biz.OauthBiz;
  * @Author: liuhualuo@163.com
  * @Date: 2012-8-10 上午9:41:59
  */
-@Service("oauthBiz")
+@Service("oauthBizImpl")
 public class OauthBizImpl implements OauthBiz {
 
     public boolean checkSignature(){

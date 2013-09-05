@@ -4,18 +4,17 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller()
-@RequestMapping("/secu")
-public class OauthWsAction extends BaseAction{
+@RequestMapping("/photos")
+public class PhotoWsAction extends BaseAction{
 	
-	private final Logger logger = Logger.getLogger(OauthWsAction.class);
+	private final Logger logger = Logger.getLogger(PhotoWsAction.class);
 	
-	@RequestMapping(value="/pass",method=RequestMethod.GET)
-	public @ResponseBody Object checkAuth(@RequestParam(value = "signature") String signature) {
-		logger.debug("sdfsdfsdfsf");
+	@RequestMapping(value="/one",method=RequestMethod.GET)
+	public @ResponseBody Object photo() {
+		logger.debug("photos");
 		boolean authPass = true;//oauthBiz.checkSignature();
 		System.out.println("-----" + authPass);
 		return "success";
